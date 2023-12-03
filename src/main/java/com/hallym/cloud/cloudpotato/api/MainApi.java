@@ -28,7 +28,7 @@ public class MainApi {
 
         try {
             // parsing할 url 지정(API 키 포함해서)
-            String url = "http://www.aladin.co.kr/ttb/api/ItemList.aspx?ttbkey=ttbhyejmh1853001&QueryType=Bestseller&MaxResults=10&start=1&SearchTarget=Book&output=xml&Version=20131101&Cover=Big";
+            String url = "http://www.aladin.co.kr/ttb/api/ItemList.aspx?ttbkey=ttbhyejmh1853001&QueryType=Bestseller&MaxResults=18&start=1&SearchTarget=Book&output=xml&Version=20131101&Cover=Big";
 
             DocumentBuilderFactory dbFactoty = DocumentBuilderFactory.newInstance();
             DocumentBuilder dBuilder = dbFactoty.newDocumentBuilder();
@@ -55,4 +55,6 @@ public class MainApi {
 
         return new Result(collect);
     }
+
+
 }

@@ -2,6 +2,7 @@ package com.hallym.cloud.cloudpotato.domain;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -14,7 +15,7 @@ import java.time.LocalDateTime;
 public class ReviewInfo {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long reviewId;
     private String userName;
     private LocalDateTime reviewDate;
@@ -23,6 +24,10 @@ public class ReviewInfo {
     private String content;
     private String emoji;
     private String resultAI;
+
+    public ReviewInfo() {
+
+    }
 
     // 수정 메서드
     public void change(String content, String emoji, String resultAI) {
