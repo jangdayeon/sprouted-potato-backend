@@ -17,6 +17,7 @@ import java.util.stream.Collectors;
 public class BookdetailApi {
 
     private final ReviewInfoService reviewInfoService;
+    private final ClovaSentiment clovaSentiment;
 
     @GetMapping("/bookdetail/{isbn}")
     public EmojiCountResponse emojiCountApi(@PathVariable("isbn") String isbn) {
