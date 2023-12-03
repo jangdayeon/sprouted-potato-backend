@@ -144,4 +144,40 @@ public class MainApi {
         return new Result(collect);
     }
 
+    @GetMapping("/main/4")
+    public Result sortByReviews(){
+        List<String> isbns = reviewInfoService.findByReviews();
+        List<String> convertIsbns = resizeList(isbns, 18);
+        List<BestsellerResultDto> collect = new ArrayList<>(convertIsbns.size());
+
+        aladinApi aapi = new aladinApi();
+
+        // 본인이 받은 api키를 추가
+        String key = "";
+        try {
+            DocumentBuilderFactory dbFactoty = DocumentBuilderFactory.newInstance();
+            DocumentBuilder dBuilder = dbFactoty.newDocumentBuilder();
+            for(int i=0;i<collect.size();i++) {
+                // parsing할 url 지정(API 키 포함해서)
+                String url = "https://www.aladin.co.kr/ttb/api/ItemLookUp.aspx?ttbkey=ttbhyejmh1853001&itemIdType=ISBN13&SearchTarget=Book&ItemId=" + convertIsbns.get(i) + "&output=xml&Version=20131101&Cover=Big";
+
+                Document doc = dBuilder.parse(url);
+
+                // 제일 첫번째 태그
+                doc.getDocumentElement().normalize();
+
+                // 파싱할 tag
+                NodeList nList = doc.getElementsByTagName("item");
+
+                Node nNode = nList.item(0);
+                Element eElement = (Element) nNode;
+                BestsellerResultDto br = new BestsellerResultDto(aapi.getTagValue("title", eElement), aapi.getTagValue("author", eElement), aapi.getTagValue("isbn13", eElement), aapi.getTagValue("publisher", eElement),aapi.getTagValue("cover", eElement));
+                collect.add(br);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return new Result(collect);
+    }
 }
