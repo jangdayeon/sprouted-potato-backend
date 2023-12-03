@@ -47,7 +47,7 @@ public class BookdetailApi {
     @PutMapping("/bookdetail/edit/{reviewId}")
     public CommentResponse commentEdit(@PathVariable("reviewId") long reviewId,
                                        @RequestBody EditCommentRequest request) {
-        String responseMessage = reviewInfoService.editReviewComment(reviewId, request.getPasswd(), request.getContent(), request.getEmoji(), "Positive");
+        String responseMessage = reviewInfoService.editReviewComment(reviewId, request.getContent(), request.getEmoji(), "Positive");
         return new CommentResponse(responseMessage);
     }
 
@@ -66,5 +66,15 @@ public class BookdetailApi {
                 .toList();
 
         return new Result(collect);
+    }
+
+    @GetMapping("/bookdetail/passwd")
+    public CommentResponse editPasswdCheck(@RequestParam("reviewId") long reviewId,
+                                           @RequestParam("passwd") String passwd) {
+        ReviewInfo reviewInfo = reviewInfoService.findReviewInfo(reviewId);
+        if(passwd.equals(reviewInfo.getReviewPw())) {
+            return new CommentResponse("true");
+        }
+        return new CommentResponse("false");
     }
 }

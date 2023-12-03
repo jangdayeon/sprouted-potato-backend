@@ -5,9 +5,9 @@ import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class EditCommentRequest {
-    private String content;
-    private String emoji;
+public class EditPasswdCheckRequest {
+    private long reviewId;
+    private String passwd;
 
-    EditCommentRequest() {}
+    EditPasswdCheckRequest() {}
 }

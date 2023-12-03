@@ -30,17 +30,11 @@ public class ReviewInfoService {
 
     // comment 수정
     @Transactional
-    public String editReviewComment(long reviewId, String pw, String content, String emoji, String resultAI) {
+    public String editReviewComment(long reviewId, String content, String emoji, String resultAI) {
         Optional<ReviewInfo> findReviewInfo = reviewInfoRepository.findById(reviewId);
-        if(findReviewInfo.isPresent()) {
-            ReviewInfo ri = findReviewInfo.get();
-            if(ri.getReviewPw().equals(pw)) {
-                ri.change(content, emoji, resultAI);
-                return "edit comment success";
-            }
-        }
+        findReviewInfo.ifPresent(findReview -> findReview.change(content, emoji, resultAI));
 
-        return "edit comment failed";
+        return "edit comment success";
     }
 
     // comment 삭제
