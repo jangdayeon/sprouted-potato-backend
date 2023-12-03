@@ -11,5 +11,6 @@ public interface ReviewInfoRepository extends JpaRepository<ReviewInfo, Long> {
     public List<String> findDistinctIsbn();
 
     public long countByIsbnAndEmoji(String isbn, String emoji);
-    public List<ReviewInfo> findByEmoji(String emoji);
+
+    public long countByIsbn(String isbn);
 }
