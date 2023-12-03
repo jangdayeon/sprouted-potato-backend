@@ -52,6 +52,8 @@ public class ReviewInfoService {
             if(ri.getReviewPw().equals(pw)) {
                 reviewInfoRepository.deleteById(reviewId);
                 return "delete comment success";
+            } else {
+                return "passwd is wrong";
             }
         }
 

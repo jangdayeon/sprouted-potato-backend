@@ -62,7 +62,7 @@ public class BookdetailApi {
     public Result commentList(@PathVariable("isbn") String isbn) {
         List<ReviewInfo> allReviewInfo = reviewInfoService.findAllReviewInfo(isbn);
         List<ReviewInfoDto> collect = allReviewInfo.stream()
-                .map(m -> new ReviewInfoDto(m.getUserName(), m.getContent(), m.getEmoji(), m.getResultAI()))
+                .map(m -> new ReviewInfoDto(m.getReviewId(), m.getUserName(), m.getContent(), m.getEmoji(), m.getResultAI()))
                 .toList();
 
         return new Result(collect);

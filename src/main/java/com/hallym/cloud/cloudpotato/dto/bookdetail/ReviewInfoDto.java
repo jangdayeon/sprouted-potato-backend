@@ -6,6 +6,7 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class ReviewInfoDto {
+    private long reviewId;
     private String name;
     private String content;
     private String emoji;
