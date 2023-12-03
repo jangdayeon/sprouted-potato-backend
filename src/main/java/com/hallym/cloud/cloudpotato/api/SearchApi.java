@@ -23,7 +23,7 @@ public class SearchApi {
 
     @GetMapping("/search/{searchOne}")
     public Result booksFind(@PathVariable("searchOne") String searchOne) {
-        AladinApi aapi = new AladinApi();
+        aladinApi aapi = new aladinApi();
 
         // 본인이 받은 api키를 추가
         List<BooksFindDto> collect = new ArrayList<>();

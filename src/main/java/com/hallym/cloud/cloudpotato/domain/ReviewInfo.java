@@ -25,6 +25,8 @@ public class ReviewInfo {
     private String emoji;
     private String resultAI;
 
+    public ReviewInfo() {}
+
     // 생성자
     public ReviewInfo(String userName, LocalDateTime reviewDate,
                       String reviewPw, String isbn, String content,
@@ -37,8 +39,6 @@ public class ReviewInfo {
         this.emoji = emoji;
         this.resultAI = resultAI;
     }
-
-    public ReviewInfo() {}
 
     // 수정 메서드
     public void change(String content, String emoji, String resultAI) {

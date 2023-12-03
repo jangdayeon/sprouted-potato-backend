@@ -128,9 +128,9 @@ public class ReviewInfoService {
         List<String> list1 = reviewInfoRepository.findDistinctIsbn();
         List<String[]> list2 = new ArrayList<>(list1.size());
         for(int i=0;i<list1.size();i++){
-            Long cnt = reviewInfoRepository.countByIsbnAndEmoji(list1.get(i),"\uD83D\uDE04");
-            cnt += reviewInfoRepository.countByIsbnAndEmoji(list1.get(i),"\uD83E\uDD79");
-            cnt += reviewInfoRepository.countByIsbnAndEmoji(list1.get(i),"\uD83D\uDE0D");
+            Long cnt = reviewInfoRepository.countByIsbnAndEmoji(list1.get(i),"😄");
+            cnt += reviewInfoRepository.countByIsbnAndEmoji(list1.get(i),"🥹");
+            cnt += reviewInfoRepository.countByIsbnAndEmoji(list1.get(i),"😍");
             list2.add(new String[]{list1.get(i), String.valueOf(cnt)});
         }
 

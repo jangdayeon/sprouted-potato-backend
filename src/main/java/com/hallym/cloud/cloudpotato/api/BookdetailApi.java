@@ -7,7 +7,13 @@ import com.hallym.cloud.cloudpotato.service.ReviewInfoService;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -83,5 +89,41 @@ public class BookdetailApi {
             return new CommentResponse("true");
         }
         return new CommentResponse("false");
+    }
+
+    @GetMapping("/booksDetail/{isbn}")
+    public Result booksDetail(@PathVariable("isbn") String isbn) {
+        aladinApi aapi = new aladinApi();
+
+        // 본인이 받은 api키를 추가
+        String key = "";
+        BooksDetailDto collect = new BooksDetailDto();
+
+        try {
+            // parsing할 url 지정(API 키 포함해서)
+            String url = "http://www.aladin.co.kr/ttb/api/ItemLookUp.aspx?ttbkey=ttbhyejmh1853001&itemIdType=ISBN13&ItemId="+isbn+"&output=xml&Version=20131101&O&&Cover=Big";
+
+            DocumentBuilderFactory dbFactoty = DocumentBuilderFactory.newInstance();
+            DocumentBuilder dBuilder = dbFactoty.newDocumentBuilder();
+            Document doc = dBuilder.parse(url);
+
+            // 제일 첫번째 태그
+            doc.getDocumentElement().normalize();
+
+            // 파싱할 tag
+            NodeList nList = doc.getElementsByTagName("item");
+
+            for (int temp = 0; temp < nList.getLength(); temp++) {
+                Node nNode = nList.item(temp);
+
+                Element eElement = (Element) nNode;
+
+                collect = new BooksDetailDto(aapi.getTagValue("title", eElement), aapi.getTagValue("author", eElement), aapi.getTagValue("pubDate", eElement),aapi.getTagValue("description", eElement),aapi.getTagValue("isbn13", eElement), aapi.getTagValue("cover", eElement), aapi.getTagValue("categoryName", eElement), aapi.getTagValue("publisher", eElement));
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return new Result(collect);
     }
 }

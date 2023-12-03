@@ -1,5 +1,6 @@
 package com.hallym.cloud.cloudpotato.api;
 
+import ch.qos.logback.classic.Logger;
 import com.hallym.cloud.cloudpotato.dto.BestsellerResultDto;
 import com.hallym.cloud.cloudpotato.dto.Result;
 import com.hallym.cloud.cloudpotato.service.ReviewInfoService;
@@ -74,8 +75,7 @@ public class MainApi {
     public Result sortByEmoji(@PathVariable("emoji") String emoji){
         List<String> isbns = reviewInfoService.findByEmoji(emoji);
         List<String> convertIsbns = resizeList(isbns, 18);
-        List<BestsellerResultDto> collect = new ArrayList<>(convertIsbns.size());
-
+        List<BestsellerResultDto> collect = new ArrayList<>();
         aladinApi aapi = new aladinApi();
 
         // 본인이 받은 api키를 추가
@@ -83,7 +83,7 @@ public class MainApi {
         try {
             DocumentBuilderFactory dbFactoty = DocumentBuilderFactory.newInstance();
             DocumentBuilder dBuilder = dbFactoty.newDocumentBuilder();
-            for(int i=0;i<collect.size();i++) {
+            for(int i=0;i<convertIsbns.size();i++) {
                 // parsing할 url 지정(API 키 포함해서)
                 String url = "https://www.aladin.co.kr/ttb/api/ItemLookUp.aspx?ttbkey=ttbhyejmh1853001&itemIdType=ISBN13&SearchTarget=Book&ItemId=" + convertIsbns.get(i) + "&output=xml&Version=20131101&Cover=Big";
 
@@ -111,7 +111,7 @@ public class MainApi {
     public Result sortByEmojis(){
         List<String> isbns = reviewInfoService.findByEmojis();
         List<String> convertIsbns = resizeList(isbns, 18);
-        List<BestsellerResultDto> collect = new ArrayList<>(convertIsbns.size());
+        List<BestsellerResultDto> collect = new ArrayList<>();
 
         aladinApi aapi = new aladinApi();
 
@@ -120,7 +120,7 @@ public class MainApi {
         try {
             DocumentBuilderFactory dbFactoty = DocumentBuilderFactory.newInstance();
             DocumentBuilder dBuilder = dbFactoty.newDocumentBuilder();
-            for(int i=0;i<collect.size();i++) {
+            for(int i=0;i<convertIsbns.size();i++) {
                 // parsing할 url 지정(API 키 포함해서)
                 String url = "https://www.aladin.co.kr/ttb/api/ItemLookUp.aspx?ttbkey=ttbhyejmh1853001&itemIdType=ISBN13&SearchTarget=Book&ItemId=" + convertIsbns.get(i) + "&output=xml&Version=20131101&Cover=Big";
 
@@ -148,7 +148,7 @@ public class MainApi {
     public Result sortByReviews(){
         List<String> isbns = reviewInfoService.findByReviews();
         List<String> convertIsbns = resizeList(isbns, 18);
-        List<BestsellerResultDto> collect = new ArrayList<>(convertIsbns.size());
+        List<BestsellerResultDto> collect = new ArrayList<>();
 
         aladinApi aapi = new aladinApi();
 
@@ -157,7 +157,7 @@ public class MainApi {
         try {
             DocumentBuilderFactory dbFactoty = DocumentBuilderFactory.newInstance();
             DocumentBuilder dBuilder = dbFactoty.newDocumentBuilder();
-            for(int i=0;i<collect.size();i++) {
+            for(int i=0;i<convertIsbns.size();i++) {
                 // parsing할 url 지정(API 키 포함해서)
                 String url = "https://www.aladin.co.kr/ttb/api/ItemLookUp.aspx?ttbkey=ttbhyejmh1853001&itemIdType=ISBN13&SearchTarget=Book&ItemId=" + convertIsbns.get(i) + "&output=xml&Version=20131101&Cover=Big";
 
@@ -180,4 +180,6 @@ public class MainApi {
         }
         return new Result(collect);
     }
+
+
 }
