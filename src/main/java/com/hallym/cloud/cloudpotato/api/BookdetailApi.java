@@ -44,6 +44,12 @@ public class BookdetailApi {
         return new CommentResponse("create comment success");
     }
 
+    @GetMapping("/bookdetail/editForm/{reviewId}")
+    public EditFormResponse commentEditForm(@PathVariable("reviewId") long reviewId) {
+        ReviewInfo reviewInfo = reviewInfoService.findReviewInfo(reviewId);
+        return new EditFormResponse(reviewInfo.getUserName(), reviewInfo.getContent(), reviewInfo.getEmoji());
+    }
+
     @PutMapping("/bookdetail/edit/{reviewId}")
     public CommentResponse commentEdit(@PathVariable("reviewId") long reviewId,
                                        @RequestBody EditCommentRequest request) {
