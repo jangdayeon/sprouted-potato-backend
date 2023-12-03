@@ -64,6 +64,6 @@ public class ReviewInfoService {
     }
 
     public List<ReviewInfo> findAllReviewInfo(String isbn) {
-        return reviewInfoRepository.findAllByIsbn(isbn);
+        return reviewInfoRepository.findAllByIsbnOrderByReviewDateDesc(isbn);
     }
 }
