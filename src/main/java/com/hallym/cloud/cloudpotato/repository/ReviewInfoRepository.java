@@ -16,4 +16,6 @@ public interface ReviewInfoRepository extends JpaRepository<ReviewInfo, Long> {
     long countByIsbnAndEmoji(String isbn, String emoji);
 
     List<ReviewInfo> findAllByIsbnOrderByReviewDateDesc(String isbn);
+
+    long countByIsbnAndResultAI(String isbn, String resultai);
 }

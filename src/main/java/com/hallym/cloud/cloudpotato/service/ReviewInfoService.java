@@ -68,7 +68,7 @@ public class ReviewInfoService {
         return reviewInfoRepository.findAllByIsbnOrderByReviewDateDesc(isbn);
     }
 
-    @Transactional(readOnly = true)
+
     public List<String> findByEmoji(String emoji){
         //리뷰작성한 책 모두 가져오기
         List<String> list1 = reviewInfoRepository.findDistinctIsbn();
@@ -122,7 +122,7 @@ public class ReviewInfoService {
 //        return returnList;
 //    }
 
-    @Transactional(readOnly = true)
+
     public List<String> findByEmojis(){
         //리뷰작성한 책 모두 가져오기
         List<String> list1 = reviewInfoRepository.findDistinctIsbn();
@@ -151,7 +151,7 @@ public class ReviewInfoService {
         return returnList;
     }
 
-    @Transactional(readOnly = true)
+
     public List<String> findByReviews(){
         //리뷰작성한 책 모두 가져오기
         List<String> list1 = reviewInfoRepository.findDistinctIsbn();

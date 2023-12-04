@@ -3,6 +3,7 @@ package com.hallym.cloud.cloudpotato.api;
 import com.hallym.cloud.cloudpotato.domain.ReviewInfo;
 import com.hallym.cloud.cloudpotato.dto.Result;
 import com.hallym.cloud.cloudpotato.dto.bookdetail.*;
+import com.hallym.cloud.cloudpotato.repository.ReviewInfoRepository;
 import com.hallym.cloud.cloudpotato.service.ReviewInfoService;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -23,7 +24,7 @@ import java.util.stream.Collectors;
 public class BookdetailApi {
 
     private final ReviewInfoService reviewInfoService;
-    private final ClovaSentiment clovaSentiment;
+    private final ReviewInfoRepository reviewInfoRepository;
 
     @GetMapping("/bookdetail/{isbn}")
     public EmojiCountResponse emojiCountApi(@PathVariable("isbn") String isbn) {
@@ -146,5 +147,20 @@ public class BookdetailApi {
             e.printStackTrace();
         }
         return new Result(collect);
+    }
+
+    @GetMapping("/bookdetail/resultAI/stats/{isbn}")
+    public SentimentStatsResponse sentimentStatsResponse(@PathVariable("isbn") String isbn) {
+        double positive = reviewInfoRepository.countByIsbnAndResultAI(isbn, "긍정");
+        double neutral = reviewInfoRepository.countByIsbnAndResultAI(isbn, "중립");
+        double negative = reviewInfoRepository.countByIsbnAndResultAI(isbn, "부정");
+
+        double allReviewCount = reviewInfoRepository.countByIsbn(isbn);
+
+        double positiveStats = (positive / allReviewCount) * 100;
+        double neutralStats = (neutral / allReviewCount) * 100;
+        double negativeStats = (negative / allReviewCount) * 100;
+
+        return new SentimentStatsResponse(positiveStats, neutralStats, negativeStats);
     }
 }
