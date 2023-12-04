@@ -1,6 +1,5 @@
 package com.hallym.cloud.cloudpotato.api;
-//import com.hallym.cloud.cloudpotato.dto.bookdetail.ClovaApiKey;
-import com.hallym.cloud.cloudpotato.dto.Result;
+
 import com.hallym.cloud.cloudpotato.dto.bookdetail.ClovaApiKey;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -18,11 +17,13 @@ import java.nio.charset.StandardCharsets;
 
 @RestController
 public class ClovaSentiment {
+    StringBuffer response = new StringBuffer();
     ClovaApiKey clovaApiKey = new ClovaApiKey();
 
     @GetMapping("/sentiment")
     public String sentiment(@RequestParam("content") String reviewContent) {
         try {
+            String content = "{\"content\":\"" + reviewContent + "\"}";
             String apiURL = "https://naveropenapi.apigw.ntruss.com/sentiment-analysis/v1/analyze";
             URL url = new URL(apiURL);
             HttpURLConnection con = (HttpURLConnection) url.openConnection();
@@ -31,8 +32,7 @@ public class ClovaSentiment {
             con.setRequestProperty("X-NCP-APIGW-API-KEY", clovaApiKey.getClientSecret());
             con.setRequestProperty("Content-Type", "application/json");
 
-            String postParams = "{\"content\":\"" + reviewContent + "\"}";;
-            StringBuilder response = new StringBuilder();
+            String postParams = "{\"content\":\"싸늘하다. 가슴에 비수가 날아와 꽂힌다.\"}";
 
             con.setUseCaches(false);
             con.setDoOutput(true);
@@ -57,10 +57,9 @@ public class ClovaSentiment {
             br.close();
 
             System.out.println(response.toString());
-            return response.toString();
         } catch(Exception e) {
             System.out.println(e);
         }
-        return "sentiment is null";
+        return response.toString();
     }
 }

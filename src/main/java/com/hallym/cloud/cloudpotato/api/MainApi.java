@@ -61,8 +61,9 @@ public class MainApi {
 
                 Element eElement = (Element) nNode;
 
-                BestsellerResultDto br = new BestsellerResultDto(aapi.getTagValue("title", eElement), aapi.getTagValue("author", eElement), aapi.getTagValue("isbn13", eElement), aapi.getTagValue("publisher", eElement),aapi.getTagValue("cover", eElement));
+                BestsellerResultDto br = new BestsellerResultDto(aapi.getTagValue("title", eElement), aapi.getTagValue("author", eElement), aapi.getTagValue("isbn", eElement), aapi.getTagValue("publisher", eElement),aapi.getTagValue("cover", eElement));
                 collect.add(br);
+                System.out.println(br);
             }
 
         } catch (Exception e) {
@@ -85,7 +86,7 @@ public class MainApi {
             DocumentBuilder dBuilder = dbFactoty.newDocumentBuilder();
             for(int i=0;i<convertIsbns.size();i++) {
                 // parsing할 url 지정(API 키 포함해서)
-                String url = "https://www.aladin.co.kr/ttb/api/ItemLookUp.aspx?ttbkey=ttbhyejmh1853001&itemIdType=ISBN13&SearchTarget=Book&ItemId=" + convertIsbns.get(i) + "&output=xml&Version=20131101&Cover=Big";
+                String url = "https://www.aladin.co.kr/ttb/api/ItemLookUp.aspx?ttbkey=ttbhyejmh1853001&itemIdType=ISBN&SearchTarget=Book&ItemId=" + convertIsbns.get(i) + "&output=xml&Version=20131101&Cover=Big";
 
                 Document doc = dBuilder.parse(url);
 
@@ -97,7 +98,7 @@ public class MainApi {
 
                 Node nNode = nList.item(0);
                 Element eElement = (Element) nNode;
-                BestsellerResultDto br = new BestsellerResultDto(aapi.getTagValue("title", eElement), aapi.getTagValue("author", eElement), aapi.getTagValue("isbn13", eElement), aapi.getTagValue("publisher", eElement),aapi.getTagValue("cover", eElement));
+                BestsellerResultDto br = new BestsellerResultDto(aapi.getTagValue("title", eElement), aapi.getTagValue("author", eElement), aapi.getTagValue("isbn", eElement), aapi.getTagValue("publisher", eElement),aapi.getTagValue("cover", eElement));
                 collect.add(br);
             }
 
@@ -122,7 +123,7 @@ public class MainApi {
             DocumentBuilder dBuilder = dbFactoty.newDocumentBuilder();
             for(int i=0;i<convertIsbns.size();i++) {
                 // parsing할 url 지정(API 키 포함해서)
-                String url = "https://www.aladin.co.kr/ttb/api/ItemLookUp.aspx?ttbkey=ttbhyejmh1853001&itemIdType=ISBN13&SearchTarget=Book&ItemId=" + convertIsbns.get(i) + "&output=xml&Version=20131101&Cover=Big";
+                String url = "https://www.aladin.co.kr/ttb/api/ItemLookUp.aspx?ttbkey=ttbhyejmh1853001&itemIdType=ISBN&SearchTarget=Book&ItemId=" + convertIsbns.get(i) + "&output=xml&Version=20131101&Cover=Big";
 
                 Document doc = dBuilder.parse(url);
 
@@ -134,7 +135,7 @@ public class MainApi {
 
                 Node nNode = nList.item(0);
                 Element eElement = (Element) nNode;
-                BestsellerResultDto br = new BestsellerResultDto(aapi.getTagValue("title", eElement), aapi.getTagValue("author", eElement), aapi.getTagValue("isbn13", eElement), aapi.getTagValue("publisher", eElement),aapi.getTagValue("cover", eElement));
+                BestsellerResultDto br = new BestsellerResultDto(aapi.getTagValue("title", eElement), aapi.getTagValue("author", eElement), aapi.getTagValue("isbn", eElement), aapi.getTagValue("publisher", eElement),aapi.getTagValue("cover", eElement));
                 collect.add(br);
             }
 
@@ -159,7 +160,7 @@ public class MainApi {
             DocumentBuilder dBuilder = dbFactoty.newDocumentBuilder();
             for(int i=0;i<convertIsbns.size();i++) {
                 // parsing할 url 지정(API 키 포함해서)
-                String url = "https://www.aladin.co.kr/ttb/api/ItemLookUp.aspx?ttbkey=ttbhyejmh1853001&itemIdType=ISBN13&SearchTarget=Book&ItemId=" + convertIsbns.get(i) + "&output=xml&Version=20131101&Cover=Big";
+                String url = "https://www.aladin.co.kr/ttb/api/ItemLookUp.aspx?ttbkey=ttbhyejmh1853001&itemIdType=ISBN&SearchTarget=Book&ItemId=" + convertIsbns.get(i) + "&output=xml&Version=20131101&Cover=Big";
 
                 Document doc = dBuilder.parse(url);
 
@@ -171,7 +172,7 @@ public class MainApi {
 
                 Node nNode = nList.item(0);
                 Element eElement = (Element) nNode;
-                BestsellerResultDto br = new BestsellerResultDto(aapi.getTagValue("title", eElement), aapi.getTagValue("author", eElement), aapi.getTagValue("isbn13", eElement), aapi.getTagValue("publisher", eElement),aapi.getTagValue("cover", eElement));
+                BestsellerResultDto br = new BestsellerResultDto(aapi.getTagValue("title", eElement), aapi.getTagValue("author", eElement), aapi.getTagValue("isbn", eElement), aapi.getTagValue("publisher", eElement),aapi.getTagValue("cover", eElement));
                 collect.add(br);
             }
 
