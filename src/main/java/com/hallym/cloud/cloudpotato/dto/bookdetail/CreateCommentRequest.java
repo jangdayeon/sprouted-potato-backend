@@ -11,6 +11,7 @@ public class CreateCommentRequest {
     private String emoji;
     private String isbn;
     private String reviewPw;
+    private String resultAI;
 
     CreateCommentRequest() {}
 }

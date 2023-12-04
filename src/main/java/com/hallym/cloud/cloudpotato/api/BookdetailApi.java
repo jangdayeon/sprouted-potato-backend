@@ -43,8 +43,17 @@ public class BookdetailApi {
 
         LocalDateTime create_date = LocalDateTime.now().withNano(0);
 
+        String resultAI = "";
+        if(request.getResultAI().equals("positive")) {
+            resultAI = "긍정";
+        } else if(request.getResultAI().equals("negative")) {
+            resultAI = "부정";
+        } else {
+            resultAI = "중립";
+        }
+
         ReviewInfo reviewInfo = new ReviewInfo(request.getName(), create_date, request.getReviewPw(), request.getIsbn(),
-                request.getContent(), request.getEmoji(), "긍정");
+                request.getContent(), request.getEmoji(), resultAI);
 
         reviewInfoService.saveReviewInfo(reviewInfo);
 
@@ -60,7 +69,19 @@ public class BookdetailApi {
     @PutMapping("/bookdetail/edit/{reviewId}")
     public CommentResponse commentEdit(@PathVariable("reviewId") long reviewId,
                                        @RequestBody EditCommentRequest request) {
-        String responseMessage = reviewInfoService.editReviewComment(reviewId, request.getContent(), request.getEmoji(), "Positive");
+
+        String resultAI = "";
+        if(request.getResultAI().equals("positive")) {
+            resultAI = "긍정";
+        } else if(request.getResultAI().equals("negative")) {
+            resultAI = "부정";
+        } else {
+            resultAI = "중립";
+        }
+
+        System.out.println("========================" + resultAI + "===================");
+
+        String responseMessage = reviewInfoService.editReviewComment(reviewId, request.getContent(), request.getEmoji(), resultAI);
         return new CommentResponse(responseMessage);
     }
 

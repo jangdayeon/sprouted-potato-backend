@@ -8,6 +8,7 @@ import lombok.Data;
 public class EditCommentRequest {
     private String content;
     private String emoji;
+    private String resultAI;
 
     EditCommentRequest() {}
 }
