@@ -93,7 +93,7 @@ public class BookdetailApi {
 
     @GetMapping("/booksDetail/{isbn}")
     public Result booksDetail(@PathVariable("isbn") String isbn) {
-        aladinApi aapi = new aladinApi();
+        AladinApi aapi = new AladinApi();
 
         // 본인이 받은 api키를 추가
         String key = "";

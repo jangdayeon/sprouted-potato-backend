@@ -36,7 +36,7 @@ public class MainApi {
 
     @GetMapping("/bestseller")
     public Result aladinBestseller() {
-        aladinApi aapi = new aladinApi();
+        AladinApi aapi = new AladinApi();
 
         // 본인이 받은 api키를 추가
         String key = "";
@@ -76,7 +76,7 @@ public class MainApi {
         List<String> isbns = reviewInfoService.findByEmoji(emoji);
         List<String> convertIsbns = resizeList(isbns, 18);
         List<BestsellerResultDto> collect = new ArrayList<>();
-        aladinApi aapi = new aladinApi();
+        AladinApi aapi = new AladinApi();
 
         // 본인이 받은 api키를 추가
         String key = "";
@@ -113,7 +113,7 @@ public class MainApi {
         List<String> convertIsbns = resizeList(isbns, 18);
         List<BestsellerResultDto> collect = new ArrayList<>();
 
-        aladinApi aapi = new aladinApi();
+        AladinApi aapi = new AladinApi();
 
         // 본인이 받은 api키를 추가
         String key = "";
@@ -150,7 +150,7 @@ public class MainApi {
         List<String> convertIsbns = resizeList(isbns, 18);
         List<BestsellerResultDto> collect = new ArrayList<>();
 
-        aladinApi aapi = new aladinApi();
+        AladinApi aapi = new AladinApi();
 
         // 본인이 받은 api키를 추가
         String key = "";

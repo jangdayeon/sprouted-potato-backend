@@ -3,7 +3,7 @@ package com.hallym.cloud.cloudpotato.api;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
-public class aladinApi {
+public class AladinApi {
     // tag값의 정보를 가져오는 함수
     public String getTagValue(String tag, Element eElement) {
 
