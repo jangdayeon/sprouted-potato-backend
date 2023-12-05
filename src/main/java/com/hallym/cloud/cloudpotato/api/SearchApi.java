@@ -47,7 +47,7 @@ public class SearchApi {
 
                 Element eElement = (Element) nNode;
 
-                Optional<BooksFindDto> book = Optional.of(new BooksFindDto(aapi.getTagValue("title", eElement), aapi.getTagValue("author", eElement), aapi.getTagValue("isbn13", eElement), aapi.getTagValue("publisher", eElement), aapi.getTagValue("cover", eElement)));
+                Optional<BooksFindDto> book = Optional.of(new BooksFindDto(aapi.getTagValue("title", eElement), aapi.getTagValue("author", eElement), aapi.getTagValue("isbn", eElement), aapi.getTagValue("publisher", eElement), aapi.getTagValue("cover", eElement)));
                 collect.add(book.orElse(null));
             }
 

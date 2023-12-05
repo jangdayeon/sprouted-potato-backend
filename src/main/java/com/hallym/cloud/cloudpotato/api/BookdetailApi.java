@@ -123,7 +123,7 @@ public class BookdetailApi {
 
         try {
             // parsing할 url 지정(API 키 포함해서)
-            String url = "http://www.aladin.co.kr/ttb/api/ItemLookUp.aspx?ttbkey=ttbhyejmh1853001&itemIdType=ISBN13&ItemId="+isbn+"&output=xml&Version=20131101&O&&Cover=Big";
+            String url = "http://www.aladin.co.kr/ttb/api/ItemLookUp.aspx?ttbkey=ttbhyejmh1853001&itemIdType=ISBN&ItemId="+isbn+"&output=xml&Version=20131101&O&&Cover=Big";
 
             DocumentBuilderFactory dbFactoty = DocumentBuilderFactory.newInstance();
             DocumentBuilder dBuilder = dbFactoty.newDocumentBuilder();

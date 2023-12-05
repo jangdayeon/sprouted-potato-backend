@@ -17,6 +17,7 @@ import java.nio.charset.StandardCharsets;
 
 @RestController
 public class ClovaSentiment {
+    StringBuffer response = new StringBuffer();
     ClovaApiKey clovaApiKey = new ClovaApiKey();
 
     @GetMapping("/sentiment")
@@ -30,8 +31,8 @@ public class ClovaSentiment {
             con.setRequestProperty("X-NCP-APIGW-API-KEY", clovaApiKey.getClientSecret());
             con.setRequestProperty("Content-Type", "application/json");
 
-            StringBuffer response = new StringBuffer();
-            String postParams = "{\"content\":\"" + reviewContent +"\"}";
+            String postParams = "{\"content\":\"" + reviewContent + "\"}";;
+            StringBuilder response = new StringBuilder();
 
             con.setUseCaches(false);
             con.setDoOutput(true);
@@ -60,6 +61,6 @@ public class ClovaSentiment {
         } catch(Exception e) {
             System.out.println(e);
         }
-        return "sentiment is error";
+        return "sentiment is null";
     }
 }
